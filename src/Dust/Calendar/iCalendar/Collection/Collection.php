@@ -14,6 +14,7 @@
 namespace Dust\Calendar\iCalendar\Collection;
 
 use Dust\Calendar\iCalendar\Collection\Exception\NodeNotFoundException;
+use Dust\Calendar\iCalendar\Document\Document;
 use Dust\Calendar\iCalendar\Node\Node;
 
 /**
@@ -287,5 +288,42 @@ abstract class Collection extends Node implements \ArrayAccess, \Countable, \Ite
         array_push($this->_aNodes, $oNode);
 
         return $this;
+    }
+
+    /**
+     * Return the iCal-representation of this node
+     *
+     * @return string
+     */
+    public function toICal()
+    {
+        $sReturn = 'BEGIN:' . $this->getName() . Document::EOL;
+
+        foreach ($this->_aNodes as $oNode) {
+            $sReturn .= $oNode->toICal() . Document::EOL;
+        }
+
+        $sReturn .= 'END:' . $this->getName();
+
+        return $sReturn;
+    }
+
+    /**
+     * Return the xCal-representation of this node
+     *
+     * @return string
+     */
+    public function toXCal()
+    {
+        $sLowerName = strtolower($this->getName());
+        $sReturn    = '<' . $sLowerName . '>' . Document::EOL;
+
+        foreach ($this->_aNodes as $oNode) {
+            $sReturn .= $oNode->toXCal() . Document::EOL;
+        }
+
+        $sReturn .= '</' . $sLowerName . '>';
+
+        return $sReturn;
     }
 }
