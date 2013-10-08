@@ -202,6 +202,17 @@ class Document extends Collection
     }
 
     /**
+     * Return the xCal-representation of this node
+     *
+     * @return string
+     * @throws \RuntimeException
+     */
+    public function toXCal()
+    {
+        throw new \RuntimeException('Unimplemented yet');
+    }
+
+    /**
      * Return the version of the document
      *
      * @return float
