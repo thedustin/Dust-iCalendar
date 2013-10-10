@@ -132,4 +132,14 @@ class Geo extends Node
 
         return $this;
     }
+
+    /**
+     * Return the value of the node as a plain string to use in the *.iCal-File
+     *
+     * @return string
+     */
+    public function getCalendarValue()
+    {
+        return sprintf('%f;%f', $this->getLatitude(), $this->getLongitude());
+    }
 }
