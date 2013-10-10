@@ -32,11 +32,6 @@ class Document extends Collection
 {
 
     /**
-     * The default linebreak
-     */
-    const EOL = "\r\n";
-
-    /**
      * The name of the Node.
      * Will be used by genewating the *.iCal- and *.xCal-File
      */
@@ -188,12 +183,12 @@ class Document extends Collection
      */
     public function toICal()
     {
-        $sReturn = 'BEGIN:' . $this->getName() . Document::EOL;
-        $sReturn .= sprintf('VERSION:%1.1f', $this->getVersion()) . Document::EOL;
-        $sReturn .= 'PRODID:' . $this->getProdId() . Document::EOL;
+        $sReturn = 'BEGIN:' . $this->getName() . Node::EOL;
+        $sReturn .= sprintf('VERSION:%1.1f', $this->getVersion()) . Node::EOL;
+        $sReturn .= 'PRODID:' . $this->getProdId() . Node::EOL;
 
         foreach ($this->_aNodes as $oNode) {
-            $sReturn .= $oNode->toICal() . Document::EOL;
+            $sReturn .= $oNode->toICal() . Node::EOL;
         }
 
         $sReturn .= 'END:' . $this->getName();

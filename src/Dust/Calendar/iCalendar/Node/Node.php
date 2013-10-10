@@ -35,6 +35,21 @@ abstract class Node {
     const NODE_NAME = 'UNKNOWN';
 
     /**
+     * The max length of a line (in "Byte")
+     */
+    const MAX_LINE_LENGTH = 75;
+
+    /**
+     * The Charsequence to connect multiline values
+     */
+    const LINE_GLUE = "\r\n ";
+
+    /**
+     * The default linebreak
+     */
+    const EOL = "\r\n";
+
+    /**
      * The value of the node
      *
      * @var mixed
@@ -127,5 +142,21 @@ abstract class Node {
     {
         //TODO: IMPLEMENT
         return new DynamicNode($sNodeName, $mValue);
+    }
+
+    /**
+     * Fold a long line
+     *
+     * @param string $sCompleteLine
+     *
+     * @return string
+     */
+    protected function _foldLine($sCompleteLine)
+    {
+        if(strlen($sCompleteLine) < static::MAX_LINE_LENGTH){
+            return $sCompleteLine;
+        }
+
+        return wordwrap($sCompleteLine, static::MAX_LINE_LENGTH - strlen(static::LINE_GLUE), static::LINE_GLUE, true);
     }
 }

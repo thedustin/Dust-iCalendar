@@ -297,10 +297,10 @@ abstract class Collection extends Node implements \ArrayAccess, \Countable, \Ite
      */
     public function toICal()
     {
-        $sReturn = 'BEGIN:' . $this->getName() . Document::EOL;
+        $sReturn = 'BEGIN:' . $this->getName() . Node::EOL;
 
         foreach ($this->_aNodes as $oNode) {
-            $sReturn .= $oNode->toICal() . Document::EOL;
+            $sReturn .= $oNode->toICal() . Node::EOL;
         }
 
         $sReturn .= 'END:' . $this->getName();
@@ -316,10 +316,10 @@ abstract class Collection extends Node implements \ArrayAccess, \Countable, \Ite
     public function toXCal()
     {
         $sLowerName = strtolower($this->getName());
-        $sReturn    = '<' . $sLowerName . '>' . Document::EOL;
+        $sReturn    = '<' . $sLowerName . '>' . Node::EOL;
 
         foreach ($this->_aNodes as $oNode) {
-            $sReturn .= $oNode->toXCal() . Document::EOL;
+            $sReturn .= $oNode->toXCal() . Node::EOL;
         }
 
         $sReturn .= '</' . $sLowerName . '>';
