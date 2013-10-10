@@ -78,4 +78,16 @@ class DateInterval extends \DateInterval
 
         return $sReturn;
     }
+
+    /**
+     * Create a Dust\Calendar\iCalendar\Value\DateInterval from a \DateInterval
+     *
+     * @param \DateInterval $oDateInterval
+     *
+     * @return DateInterval
+     */
+    public static function createFromPlainDateInterval(\DateInterval $oDateInterval)
+    {
+        return new static($oDateInterval->format(static::INTERVAL_ISO8601));
+    }
 }
