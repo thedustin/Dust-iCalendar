@@ -143,20 +143,4 @@ abstract class Node {
         //TODO: IMPLEMENT
         return new DynamicNode($sNodeName, $mValue);
     }
-
-    /**
-     * Fold a long line
-     *
-     * @param string $sCompleteLine
-     *
-     * @return string
-     */
-    protected function _foldLine($sCompleteLine)
-    {
-        if(strlen($sCompleteLine) < static::MAX_LINE_LENGTH){
-            return $sCompleteLine;
-        }
-
-        return wordwrap($sCompleteLine, static::MAX_LINE_LENGTH - strlen(static::LINE_GLUE), static::LINE_GLUE, true);
-    }
 }

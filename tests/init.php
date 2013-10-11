@@ -21,4 +21,4 @@ spl_autoload_register(function ($sClass) {
     include 'src/' . $sClass . '.php';
 });
 
-require_once 'PHPUnit/Autoload.php';
+//require_once 'PHPUnit/Autoload.php';

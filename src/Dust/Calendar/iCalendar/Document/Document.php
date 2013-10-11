@@ -15,6 +15,7 @@ namespace Dust\Calendar\iCalendar\Document;
 
 use Dust\Calendar\iCalendar\Collection\Collection;
 use Dust\Calendar\iCalendar\Document\Exception\UnknownDocumentFormatException;
+use Dust\Calendar\iCalendar\Node\Node;
 
 /**
  * Dust-iCalendar Document
