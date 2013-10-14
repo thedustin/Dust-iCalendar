@@ -13,6 +13,8 @@
 
 namespace Dust\Calendar\iCalendar\Node;
 
+use Dust\Calendar\iCalendar\Node\UniqueIdentifier\SimpleBased;
+
 /**
  * Dust-iCalendar Node
  *
@@ -25,7 +27,7 @@ namespace Dust\Calendar\iCalendar\Node;
  * @version    Release: @package_version@
  * @link       http://thedust.in
  */
-abstract class UniqueIdentifier extends Node
+class UniqueIdentifier extends Node
 {
 
     /**
@@ -102,7 +104,10 @@ abstract class UniqueIdentifier extends Node
      *
      * @return string
      */
-    abstract public static function generateUniqueIdentifier($sHost, $iLength = 16);
+    public static function generateUniqueIdentifier($sHost, $iLength = 16)
+    {
+        return SimpleBased::generateUniqueIdentifier($sHost, $iLength);
+    }
 
     /**
      * return the host of this unique identifier
