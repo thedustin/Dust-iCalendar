@@ -145,7 +145,7 @@ abstract class Collection extends Node implements \ArrayAccess, \Countable, \Ite
      *
      * @return $this
      */
-    public function prependNode(Node $oNode)
+    public function prependNode(Node &$oNode)
     {
         array_unshift($this->_aNodes, $oNode);
 
@@ -159,7 +159,7 @@ abstract class Collection extends Node implements \ArrayAccess, \Countable, \Ite
      *
      * @return bool return true when <i>oNode</i> is a child of this node otherwise false
      */
-    public function hasNode(Node $oNode)
+    public function hasNode(Node &$oNode)
     {
         return in_array($oNode, $this->_aNodes, true);
     }
@@ -283,7 +283,7 @@ abstract class Collection extends Node implements \ArrayAccess, \Countable, \Ite
      *
      * @return $this
      */
-    public function appendNode(Node $oNode)
+    public function appendNode(Node &$oNode)
     {
         array_push($this->_aNodes, $oNode);
 
@@ -325,5 +325,23 @@ abstract class Collection extends Node implements \ArrayAccess, \Countable, \Ite
         $sReturn .= '</' . $sLowerName . '>';
 
         return $sReturn;
+    }
+
+    /**
+     * Remove the node <i>oNode</i> as child
+     *
+     * @param Node $oNode the node that should be remove
+     *
+     * @return $this
+     */
+    public function removeNode(Node &$oNode)
+    {
+        $iKey = array_search($oNode, $this->_aNodes, true);
+
+        if ($iKey !== false) {
+            unset($this->_aNodes[$iKey]);
+        }
+
+        return $this;
     }
 }
