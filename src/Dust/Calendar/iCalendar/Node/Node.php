@@ -57,6 +57,26 @@ abstract class Node {
     protected $_mValue;
 
     /**
+     * a list with node names as keys and the class als value
+     * 
+     * @var array
+     */
+    protected static $_aClassToNodeName = array(
+        'DTEND' => 'Dust\\Calendar\\iCalendar\\Node\\DateTime\\End',
+        'DTSTAMP' => 'Dust\\Calendar\\iCalendar\\Node\\DateTime\\Stamp',
+        'DTSTART' => 'Dust\\Calendar\\iCalendar\\Node\\DateTime\\Start',
+        'GEO' => 'Dust\\Calendar\\iCalendar\\Node\\Geo',
+        'STATUS' => 'Dust\\Calendar\\iCalendar\\Node\\Status',
+        'STATUS_EVENT' => 'Dust\\Calendar\\iCalendar\\Node\\Status\\Event',
+        'STATUS:EVENT' => 'Dust\\Calendar\\iCalendar\\Node\\Status\\Event',
+        'STATUS_JOURNAL' => 'Dust\\Calendar\\iCalendar\\Node\\Status\\Journal',
+        'STATUS:JOURNAL' => 'Dust\\Calendar\\iCalendar\\Node\\Status\\Journal',
+        'STATUS_TODO' => 'Dust\\Calendar\\iCalendar\\Node\\Status\\Todo',
+        'STATUS:TODO' => 'Dust\\Calendar\\iCalendar\\Node\\Status\\Todo',
+        'UID' => 'Dust\\Calendar\\iCalendar\\Node\\UniqueIdentifier',
+    );
+
+    /**
      * @param mixed $_mValue The value of the node
      */
     function __construct($_mValue)
@@ -140,7 +160,12 @@ abstract class Node {
      */
     public static function createNode($sNodeName, $mValue = null)
     {
-        //TODO: IMPLEMENT
+        if(isset(static::$_aClassToNodeName[$sNodeName])){
+            return new static::$_aClassToNodeName[$sNodeName]($mValue);
+        } else if(substr($sNodeName, 0, 2) === 'X-'){
+            return new DynamicCustomNode($sNodeName, $mValue);
+        }
+
         return new DynamicNode($sNodeName, $mValue);
     }
 }
